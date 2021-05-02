@@ -7,8 +7,8 @@ RUN git clone git://git.ipxe.org/ipxe.git /opt/ipxe
 WORKDIR /opt/ipxe/src
 COPY talos.ipxe .
 RUN sed -e "s/%SIDERO_IP%/${SIDERO_IP}/" -i talos.ipxe
-RUN make bin-x86_64-efi/ipxe.efi BUNDLE=talos.ipxe
-RUN make bin/undionly.kpxe BUNDLE=talos.ipxe
+RUN make bin-x86_64-efi/ipxe.efi EMBED=talos.ipxe
+RUN make bin/undionly.kpxe EMBED=talos.ipxe
 
 FROM ${SIDERO_IMAGE}
 COPY --from=build /opt/ipxe/src/bin/undionly.kpxe /var/lib/sidero/tftp/talos.undionly.kpxe
